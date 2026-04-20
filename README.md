@@ -103,8 +103,8 @@ not treated as a palindrome.
 
 ### Contract compliance
 
-The response shape matters — multiple teams consume it. Two small things
-keep us honest:
+"The response shape matters — multiple teams consume it". Two small things
+keeps ensures that:
 
 - `UsageItem` is a Pydantic model with `extra="forbid"`, so any accidental
   new key fails the test suite before it ships.
@@ -114,7 +114,7 @@ keep us honest:
 
 
 
-## Concessions / things I'd do next with more time
+## Concessions / Things I'd do next with more time
 
 - **No retries or circuit-breaking** on upstream calls. For a real
   billing service I'd add bounded retries with exponential backoff (for
@@ -127,10 +127,11 @@ keep us honest:
   `/usage` would sit behind the same auth layer as the rest of the stack.
 - **No pagination.** The sample dataset is small (110 messages); a real
   billing period could be much larger, and I'd stream rather than
-  materialise the full list if that became a concern.
+  materialise the full list if that became a concern. Essentially - potentially streaming/pagination support
 - **Python version pinning.** `requirements.txt` uses `>=` bounds for
   brevity. In a real repo I'd use a lockfile (`uv.lock` / `poetry.lock`)
   for reproducible builds.
+- More integration tests around real payload shapes
 
 ## Example response
 
